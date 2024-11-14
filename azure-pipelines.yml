@@ -40,7 +40,7 @@ steps:
     containerRegistry: 'myContainerRegistry'  # The service connection name for Azure Container Registry
     repository: '$(dockerImageName)'  # Name of the repository in the registry
     command: 'buildAndPush'  # Command to build and push the Docker image
-    Dockerfile: '**/Dockerfile'  # Path to your Dockerfile
+    Dockerfile: 'Dockerfile.txt'  # Path to your Dockerfile
     tags: |
       $(dockerImageTag)  # Tag for the Docker image (build ID in this case)
 
