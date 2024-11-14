@@ -42,7 +42,7 @@ steps:
     command: 'buildAndPush'  # Command to build and push the Docker image
     Dockerfile: 'Dockerfile.txt'  # Path to your Dockerfile
     tags: |
-      $(Build.BuildId)  # Tag for the Docker image (build ID in this case)
+      $(Build.BuildId)
 
 # Step 6: Publish the build artifact (Optional, if needed)
 - task: PublishBuildArtifacts@1
