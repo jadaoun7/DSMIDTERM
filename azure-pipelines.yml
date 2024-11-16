@@ -8,8 +8,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  dockerImageName: 'jadaoun/dsmidterm-api'  # Use your Docker Hub username
-  dockerRegistryServiceConnection: 'myContainerRegistry'  # Ensure this is correct
+  dockerImageName: 'jadaoun/dsmidterm-api'  
+  dockerRegistryServiceConnection: 'myContainerRegistry'  
 
 stages:
 - stage: Build
