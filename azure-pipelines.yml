@@ -8,8 +8,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  dockerImageName: 'dsmidterm'
-  dockerRegistryServiceConnection: 'your-registry-connection'
+  dockerImageName: 'dsmidterm-api'
+  dockerRegistryServiceConnection: 'myContainerRegistry'
 
 stages:
 - stage: Build
@@ -47,7 +47,7 @@ stages:
         containerRegistry: '$(dockerRegistryServiceConnection)'
         repository: '$(dockerImageName)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: '/Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
