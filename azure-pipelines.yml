@@ -1,0 +1,52 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'  # Path to the solution file
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  dockerImageName: 'myapp'  # Docker image name
+  dockerImageTag: '$(Build.BuildId)'  # Docker image tag, using build ID
+
+steps:
+# Step 1: Install NuGet tool
+- task: NuGetToolInstaller@1
+
+# Step 2: Restore NuGet packages
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+# Step 3: Build the solution using MSBuild
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)\WebApp.zip"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Step 4: Run Unit Tests or Integration Tests using VSTest
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+# Step 5: Build the Docker image and push it to the Azure Container Registry
+- task: Docker@2
+  inputs:
+    containerRegistry: 'myContainerRegistry'  # The service connection name for Azure Container Registry
+    repository: '$(dockerImageName)'  # Name of the repository in the registry
+    command: 'buildAndPush'  # Command to build and push the Docker image
+    Dockerfile: 'Dockerfile.txt'  # Path to your Dockerfile
+    tags: |
+      $(Build.BuildId)
+
+# Step 6: Publish the build artifact (Optional, if needed)
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(build.artifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
