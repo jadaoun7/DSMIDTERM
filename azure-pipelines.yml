@@ -8,8 +8,11 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  dockerImageName: 'jadaoun/dsmidterm-api'  
-  dockerRegistryServiceConnection: 'myContainerRegistry'  
+  dockerImageName: 'jadaoun/dsmidterm-api'
+  dockerRegistryServiceConnection: 'myContainerRegistry'
+  azureSubscription: 'Azureserviceconnection'  # Name of your Azure service connection
+  appServiceName: 'DSMIDTERM'                 # Name of your App Service
+  resourceGroupName: 'myResourceGroup'           # Name of your Resource Group
 
 stages:
 - stage: Build
@@ -57,3 +60,17 @@ stages:
         tags: |
           $(Build.BuildId)
           latest
+
+- stage: Deploy
+  jobs:
+  - deployment: DeployWebApp
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appName: '$(appServiceName)'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
