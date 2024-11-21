@@ -31,6 +31,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // Enable static files middleware
+app.UseDefaultFiles(); // This will look for default files like index.html
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
@@ -42,7 +43,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
     endpoints.MapControllers();
-    endpoints.MapFallbackToFile("/index.html");
+    endpoints.MapFallbackToFile("/index.html"); // This ensures that the SPA routing works
 });
 
 app.Run();
