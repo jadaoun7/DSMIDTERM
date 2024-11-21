@@ -9,9 +9,13 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DSMIDTERM
 build_property.RootNamespace = DSMIDTERM
-build_property.ProjectDir = C:\Users\Jad.aoun\Desktop\DSMIDTERM\DSMIDTERM\
+build_property.ProjectDir = C:\Users\Jad.aoun\Desktop\UA\DS\DSMIDTERM\DSMIDTERM\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Jad.aoun\Desktop\DSMIDTERM\DSMIDTERM
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = C:\Users\Jad.aoun\Desktop\UA\DS\DSMIDTERM\DSMIDTERM
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Jad.aoun/Desktop/UA/DS/DSMIDTERM/DSMIDTERM/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

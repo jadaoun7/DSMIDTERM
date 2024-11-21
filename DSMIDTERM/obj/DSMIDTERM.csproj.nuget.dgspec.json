@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jad.aoun\\Desktop\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj": {}
+    "C:\\Users\\Jad.aoun\\Desktop\\UA\\DS\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jad.aoun\\Desktop\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj": {
+    "C:\\Users\\Jad.aoun\\Desktop\\UA\\DS\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jad.aoun\\Desktop\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj",
+        "projectUniqueName": "C:\\Users\\Jad.aoun\\Desktop\\UA\\DS\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj",
         "projectName": "DSMIDTERM",
-        "projectPath": "C:\\Users\\Jad.aoun\\Desktop\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj",
+        "projectPath": "C:\\Users\\Jad.aoun\\Desktop\\UA\\DS\\DSMIDTERM\\DSMIDTERM\\DSMIDTERM.csproj",
         "packagesPath": "C:\\Users\\Jad.aoun\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jad.aoun\\Desktop\\DSMIDTERM\\DSMIDTERM\\obj\\",
+        "outputPath": "C:\\Users\\Jad.aoun\\Desktop\\UA\\DS\\DSMIDTERM\\DSMIDTERM\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jad.aoun\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
