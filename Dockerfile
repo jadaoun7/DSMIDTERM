@@ -5,13 +5,19 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DSMIDTERM.csproj", "./"]
-RUN dotnet restore "DSMIDTERM.csproj"
+# Copy solution file
+COPY ["DSMIDTERM.sln", "./"]
+# Copy all project files
+COPY ["DSMIDTERM/DSMIDTERM.csproj", "DSMIDTERM/"]
+# Restore as distinct layers
+RUN dotnet restore
+# Copy everything else
 COPY . .
-RUN dotnet build "DSMIDTERM.csproj" -c Release -o /app/build
+# Build
+RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DSMIDTERM.csproj" -c Release -o /app/publish
+RUN dotnet publish -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

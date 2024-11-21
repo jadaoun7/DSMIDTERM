@@ -8,8 +8,11 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  dockerImageName: 'dsmidterm-api'
+  dockerImageName: 'jadaoun/dsmidterm-api'
   dockerRegistryServiceConnection: 'myContainerRegistry'
+  azureSubscription: 'Azureserviceconnection'  # Name of your Azure service connection
+  appServiceName: 'DSMIDTERM'                 # Name of your App Service
+  resourceGroupName: 'myResourceGroup'        # Name of your Resource Group
 
 stages:
 - stage: Build
@@ -42,12 +45,33 @@ stages:
         arguments: '--configuration $(buildConfiguration)'
 
     - task: Docker@2
+      displayName: 'Login to Docker'
+      inputs:
+        command: 'login'
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+
+    - task: Docker@2
       displayName: 'Build and push Docker image'
       inputs:
         containerRegistry: '$(dockerRegistryServiceConnection)'
         repository: '$(dockerImageName)'
         command: 'buildAndPush'
-        Dockerfile: '/Dockerfile'
+        Dockerfile: 'Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
+
+- stage: Deploy
+  jobs:
+  - deployment: DeployWebApp
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebAppContainer@1
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appName: '$(appServiceName)'
+              imageName: '$(dockerImageName):latest'
+              resourceGroupName: '$(resourceGroupName)'
